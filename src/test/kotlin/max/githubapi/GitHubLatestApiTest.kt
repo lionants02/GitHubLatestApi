@@ -5,7 +5,7 @@ import org.junit.Ignore
 class GitHubLatestApiTest {
     @Ignore("Use")
     fun test1() {
-        val github = GitHubLatestApi("ffc-nectec/airsync")
+        val github = GitHubLatestApi("lionants02/GitHubLatestApi")
         val lastRelease = github.getLastRelease()
 
         println(lastRelease.body)
