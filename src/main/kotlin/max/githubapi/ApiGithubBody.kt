@@ -19,7 +19,7 @@ data class GithubRelease(
     val tarball_url: String,
     val zipball_url: String,
     val id: Long,
-    val node_id: Long,
+    val node_id: String,
     val tag_name: String,
     val target_commitish: String,
     val name: String,
