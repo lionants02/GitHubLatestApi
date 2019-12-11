@@ -10,7 +10,7 @@ class GitHubLatestApi(val repoName: String) : GitHubLatest {
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(githubGson))
-        .baseUrl("""https://api.github.com/""")
+        .baseUrl(GITHUB_API_URL)
         .build()
 
     override fun getLastRelease(): GithubRelease {
@@ -31,5 +31,15 @@ class GitHubLatestApi(val repoName: String) : GitHubLatest {
                     callback(response.body()!!)
                 }
             })
+    }
+
+    override fun getLastPreRelease(): GithubRelease? {
+        val githubReleasePage = GithubReleasePage(repoName)
+        while (githubReleasePage.next() != null) {
+            githubReleasePage.data.forEach {
+                if (it.prerelease) return it
+            }
+        }
+        return null
     }
 }
